@@ -2,10 +2,11 @@
 
 const Router = require("express").Router();
 const User =  require("../models/User");
+const Auth = require("../middelwares/Auth");
 
 // get all users
 
-Router.get("/users", (req, res) => {
+Router.get("/users",  (req, res) => {
 
     User.find({}, (err, users)=>{
 
@@ -26,7 +27,7 @@ Router.get("/users", (req, res) => {
 // get user 
 
 
-Router.get("/users/:id", (req, res)=>{
+Router.get("/users/:id", Auth , (req, res)=>{
 
 
         User.findById( req.params.id , (err, user) =>{
@@ -57,11 +58,11 @@ Router.get("/users/:id", (req, res)=>{
 
 //post user 
 
-Router.post("/users", (req, res)=>{
+Router.post("/users", Auth,  (req, res)=>{
 
         console.log(req.body);
 
-      const newUser= { ... req.body}
+      const newUser= { ...req.body}
 
 
         User.create(newUser, (err)=>{
@@ -84,14 +85,10 @@ Router.post("/users", (req, res)=>{
 
 // update user 
 
-Router.put("/users/:id", (req, res)=>{
-
-    
-
-    const newUser= { ... req.body}
+Router.put("/users/me", Auth, (req, res)=>{
 
 
-    User.findByIdAndUpdate(req.params.id, {$set: newUser}, (err)=>{
+        User.findAndUpdate({loginCredential: req.user._id}, req.body,{new: true}, (err, user)=>{
 
         if(err){
 
@@ -100,7 +97,7 @@ Router.put("/users/:id", (req, res)=>{
             return res.status(500).send("there was an error updating the user profile")
         }
         
-        return res.status(200).send(newUser);
+        return res.status(200).send(req.body);
 
 
     });

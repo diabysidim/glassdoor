@@ -1,0 +1,44 @@
+.container{
+
+    padding: 10px;
+    text-align: center;
+  
+}
+
+.container .header{
+    margin-top: 20px;
+  
+}
+.ui .register{
+    
+    padding: 10px;
+    width: 500px;
+    margin: auto;    
+    background-color: white;
+   
+}
+
+.register .form{
+    display: flex;
+    flex-direction: column;
+  
+
+    label{
+
+        font-size: 14px;
+    }
+
+    .header{
+
+        margin-top: 5px;
+    }
+
+    div .button{
+        margin: 5px;
+    }    
+}
+
+.form > *{
+
+    margin-bottom: 10px ;
+}

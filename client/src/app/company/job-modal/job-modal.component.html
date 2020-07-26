@@ -1,0 +1,132 @@
+
+<div  id="deleteModal" class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="header">
+     Delete Picture
+    </div>
+   <p>are you sure you want to delete the job: <span class="ui text red">{{job.job_title}}</span>? </p>
+   
+   <button class="ui button"> Cancel</button>
+   <button class="ui button red" (click)="deleteJob(job)" > Delete</button>
+  </div>
+
+  <div  id="viewModal" class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="header">
+     View Job
+    </div>
+    <table class="ui celled table">
+    
+        <tbody>
+          <tr>
+            <td data-label="job_title">Job Title</td>
+            <td data-label=""> {{job.job_title}}</td>
+            
+          </tr>
+          <tr>
+            <td data-label="Name">Location</td>
+            <td data-label="Job">{{job.location}}</td>
+          </tr>
+          <tr>
+            <td data-label="Name">Salary</td>
+            <td data-label="Age">{{job.salary}}</td>
+
+          </tr>
+          <tr>
+            <td data-label="Name">Type</td>
+            <td data-label="Age">{{job.type}}</td>
+            
+          </tr>
+          <tr>
+            <td data-label="Name">Experience Level</td>
+            <td data-label="Age">{{job.exp_level}}</td>
+            
+          </tr>
+          <tr>
+            <td data-label="Name">Deadline</td>
+            <td data-label="Age">{{job.deadline}}</td>
+            
+          </tr>
+          <tr>
+            <td data-label="Name">Description</td>
+            <td data-label="Age">{{job.job_description}}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  
+
+  <div  id="updateModal" class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Edit Job
+    </div>
+            <form class="ui form" (ngSubmit)="updateJob(form)" #form="ngForm">
+
+              <input type="hidden" name="company"  [ngModel]="job.company" required> 
+              <input type="hidden" name="_id"  [ngModel]="job._id" required>
+                    <div class="field">
+                    <label> Job Title</label>
+                      <input type="text" name="job_title" placeholder="Job Title" [ngModel]="job.job_title" required  > 
+                    </div>
+                    <div class="field">
+                        <label>Location</label>
+                      <input type="text" name="location" placeholder="Location" [ngModel]="job.location" required>
+                    </div>
+
+                    <div class="field">
+                        <label>salary</label>
+                        <input type="text" name="salary" [ngModel]="job.salary" placeholder="Salary"required>    
+                    </div> 
+
+                    <div class=" field">
+                        <label>Type</label>
+                        <select class="ui dropdown" name="type" required [ngModel]="job.type" >
+                            
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Contract">Contract</option>                            
+                        </select>
+    
+                    </div>
+
+                    <div class="field">
+                        <label>Experience Level</label>
+                        <select class="ui dropdown" name="exp_level" [ngModel]="job.exp_level" required >
+                            
+                            <option value="Senior-level">Senior-level</option>
+                            <option value="Mid-level">Mid-level</option>
+                            <option value="Entry-level">Entry-level</option>
+                            <option value="Internship">Internship</option>
+
+                        </select>
+    
+                    </div>
+
+                    <div class="field">
+                        <label>Application deadline</label>
+                        <div class="ui calendar" id="standard_calendar">
+                            <div class="ui input left icon">
+                              <i class="calendar icon"></i>
+                              <input (click)="pickDate()" name="deadline" type="text" placeholder="Date/Time" [ngModel]="job.deadline" >
+                            </div>
+                          </div>    
+                    </div>
+                   
+                    
+
+                    <div class="field">
+                        <label>Description</label>
+                        <textarea name="job_description" placeholder="Description"required [ngModel]="job.job_description"> </textarea>    
+                    </div> 
+                    
+               <div>
+                <button routerLink="/" class="ui button medium left"> Cancel </button>
+                <button class="ui button right" type="submit" >Continue</button>
+               </div>
+                
+              </form>
+  </div>
+  
+  

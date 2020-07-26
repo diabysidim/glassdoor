@@ -1,0 +1,41 @@
+
+<div class="wrapper"> 
+    <div class="ui container ">
+       
+        <div class="register">
+            <h1 class="header massive"> Register </h1>
+            <form class="ui form" (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+                  
+              
+                    <div class="field">
+                    <label>First Name</label>
+                      <input type="text" name="firstname" placeholder="First Name" required ngModel>
+                    </div>
+                    <div class="field">
+                        <label>Last Name</label>
+                      <input type="text" name="lastname" placeholder="lastname" required ngModel>
+                    </div>
+
+                    <div class="field">
+                        <label>Role</label>
+                        <input type="text" name="position" placeholder="role" ngModel>    
+                    </div> 
+
+                    <div class="field">
+                        <label>Summary</label>
+                        <textarea name="summary" placeholder="Summary"required ngModel> </textarea>    
+                    </div> 
+                    
+               <div>
+                <button type="button" class="ui button medium left">Cancel</button>
+                <button type="submit" class="ui button right" >Continue</button>
+               </div>
+                
+              </form>
+    
+    
+             
+        </div>
+        
+    </div>
+</div>

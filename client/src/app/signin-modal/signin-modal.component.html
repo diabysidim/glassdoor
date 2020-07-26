@@ -1,0 +1,22 @@
+<div  id="signinModal" class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Profile Picture
+    </div>
+    <form class="ui form" (ngSubmit)="submit(form)" #form="ngForm">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Username" Email ngModel>
+      </div>
+      <div class="field">
+        <label >Password</label>
+        <input type="text" name="password" placeholder="Password" ngModel>
+      </div>
+      
+      <button class="ui button" type="submit">Submit</button>
+      <br>
+
+      <a href="">Forgot password</a>
+    </form>
+  </div>
+  

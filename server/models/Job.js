@@ -1,4 +1,4 @@
-const UserSchema =  require('./User'); 
+
 const mongoose  = require("mongoose");
 
 jobSchema =  new mongoose.Schema({
@@ -8,7 +8,7 @@ jobSchema =  new mongoose.Schema({
         job_description: String,      
         posted_date: {type: Date, default: Date.now},
         location: String,
-        salary: String,
+        salary: Number,
         type: String,
         exp_level: String,
         nbr_views: Number,

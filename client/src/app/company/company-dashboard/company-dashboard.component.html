@@ -1,0 +1,54 @@
+
+<app-navbar></app-navbar>
+
+<div class="wrapper">
+
+    <div class="ui vertical menu">
+        <div class="item">
+          <div class="header">Company</div>
+          <div class="menu">
+            <a [routerLink]="['/companies', company_id ]" class="item">View profil</a>
+            <a [routerLink]="['/companies', company_id ,'edit']" class="item">Edit profil</a>
+            
+          </div>
+        </div>
+        <div class="item">
+          <div class="header">Jobs</div>
+          <div class="menu">
+            <a class="item" [routerLink]="['/companies', company_id ,'jobs']">View all jobs</a>
+            <a [routerLink]="['/companies', company_id ,'jobs','new']" class="item">Post a new job</a>
+          </div>
+        </div>
+        <div class="item">
+          <div class="header">Reviews</div>
+          <div class="menu">
+            <a [routerLink]="['/companies', company_id ,'reviews']" class="item">View all reviews</a>
+          </div>
+        </div>
+        <div class="item">
+          <div class="header">Account</div>
+          <div class="menu">
+            <a [routerLink]="['/companies', company_id ,'account']" class="item">View account</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui grid right-content">
+        
+        <div class="tab-content fourteen wide">
+
+            <router-outlet ></router-outlet>  
+
+        </div>
+                
+
+         
+      </div>
+     
+
+      
+
+</div>
+
+
+  <app-footer></app-footer>

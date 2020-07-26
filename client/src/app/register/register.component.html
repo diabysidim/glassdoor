@@ -1,0 +1,45 @@
+
+<div class="wrapper"> 
+    <div class="ui container ">
+       
+        <div class="register">
+            <h1 class="header massive"> Registration</h1>
+            <form class="ui form" (ngSubmit)=onSubmit(formRegister) #formRegister="ngForm">
+                          
+                  
+                    <div class="field">
+                    <label> Username</label>
+                      <input type="text" name="username" placeholder="Username" email required ngModel>
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                      <input type="text" name="password" placeholder="password" required ngModel>
+                    </div>
+                    <div class="field">
+                        <label> Password Confirmation </label>
+                        <input type="text" name="passwordConf" placeholder="Password Confirmation"required ngModel>
+    
+                    </div>  
+                    <div class=" field">
+                        <label> I'm registery as a </label>
+                        <select class="ui dropdown" name="type" required ngModel>
+                        
+                            <option value="company">Company</option>
+                            <option value="user">User</option>
+                        </select>
+    
+                    </div>
+                    
+               <div>
+                <button routerLink="/" class="ui button medium left"> Cancel </button>
+                <button type="submit" class="ui button right" tabindex="0">Continue</button>
+               </div>
+                
+              </form>
+    
+    
+             
+        </div>
+        
+    </div>
+</div>

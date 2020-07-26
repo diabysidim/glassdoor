@@ -4,15 +4,23 @@ const mongoose =  require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
 
-        job:{type: mongoose.Schema.Types.ObjectId,  ref:"Job"},
+        company:{type: mongoose.Schema.Types.ObjectId,  ref:"Company"},
         rating: Number,
-        postedBy: {type: mongoose.Schema.Types.ObjectId,  ref:"User"},
-        date: {type: Date, default: Date.now},  
-        Helpful: Number,
-        NotHelpful:Number, 
-        replies: [ {type: mongoose.Schema.Types.ObjectId, ref:"Reply"}]
-
+        user: {type: mongoose.Schema.Types.ObjectId,  ref:"User"},
+        date: {type: Date, default: Date.now}, 
+        content: String, 
+        helpful: Number,
+        notHelpful:Number, 
 })
+
+reviewSchema.virtual("replies", {
+        ref:"Reply",
+        localField:"_id",
+        foreignField:"review"
+})
+
+
+
 
 module.exports= mongoose.model("Review", reviewSchema);
 

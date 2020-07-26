@@ -1,0 +1,51 @@
+<div  id="updateUsernameModal" class="ui mini modal">
+    <i class="close icon"></i>
+
+            <form class="ui form" (ngSubmit)="updateUsername(formUser)" #formUser="ngForm">
+
+                <div class="field">
+                <label>Username</label>
+                    <input type="text" name="username" placeholder="Job Title"  required  > 
+                     <!-- [ngModel]="loginCredential.username" -->
+                </div>
+                
+               <div>
+                <button  class="ui button medium left" type="button" (click)="closeUsernameModal()"> Cancel </button>
+                <button class="ui button right" type="submit" >Confirm</button>
+               </div>
+                
+              </form>
+    </div>
+
+
+              <div  id="updatePasswordModal" class="ui mini modal">
+                <i class="close icon"></i>
+                <div class="header">
+                  Edit password
+                </div>
+                    <form class="ui form" (ngSubmit)="updatePassword(formPassword)" #formPassword="ngForm">
+        
+        
+                        <div class="field">
+                        <label>Current Password</label>
+                            <input type="text" name="currentPassword" placeholder="Current Password" ngModel required  > 
+                        </div>
+                        <div class="field">
+                            <label>New Password</label>
+                            <input type="text" name="password" placeholder="New Password" ngModel required>
+                        </div>
+    
+                        <div class="field">
+                            <label>New Password Confirmation</label>
+                            <input type="text" name="passwordConfirmation" ngModel placeholder="Confirmation for the new Password"required>    
+                        </div> 
+    
+                        
+                        
+                        <div>
+                            <button class="ui button medium left" type="button" (click)="closePasswordModal()"> Cancel </button>
+                            <button class="ui button right" type="submit" >Confirm</button>
+                        </div>
+                        
+                    </form>
+            </div>

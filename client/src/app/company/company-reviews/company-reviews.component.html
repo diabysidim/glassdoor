@@ -1,0 +1,38 @@
+
+
+<div class=" feed-container">
+
+    <div class="ui feed">  
+
+    
+   
+        <div class="event" *ngFor=" let review of reviewList">
+          <div class="label">
+            <img src="/images/avatar/small/joe.jpg">
+          </div>
+          <div class="content">
+            <div class="summary">
+              <a>{{review.user}}</a> posted on his page
+              <div class="date">
+                {{review.date}}
+              </div>
+            </div>
+            <div class="extra text">
+              {{review.content}}
+            </div>
+            <div class="meta">
+              <a class="like">
+                <i class="like icon"></i> {{review.helpful}}
+                <i class="dislike icon"></i> {{review.notHelpful}}
+              </a>
+            </div>
+          </div>
+        </div>
+       
+          
+          
+        
+    
+      </div>
+
+</div>

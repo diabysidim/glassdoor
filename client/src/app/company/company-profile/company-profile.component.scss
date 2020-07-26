@@ -1,0 +1,67 @@
+
+     
+
+        #myTab{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom:  1px solid #d4d4d5;;
+            padding: 10px;
+        }
+        
+        .company-data{
+
+                
+                
+
+                border-bottom:  1px solid #d4d4d5;
+                .h1 { padding: 20px; margin-bottom: 0; padding-bottom: 0;}
+                .table-data{
+                    padding: 0;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    table{
+
+                        width: 250px;
+                        margin: 20px;;
+                        tr{
+
+                            margin-bottom: 10px;
+                            width: 280px ;
+            
+                            .title{
+                                margin-right: 20px;
+                                font-weight: bold;
+                            }
+                        }
+
+                    
+
+                    }  
+
+                }
+
+               
+
+                div {
+
+                padding: 20px;
+
+                    // h1{
+                    //     text-align: center;
+                    // }
+
+                }
+            
+        
+
+        }
+        
+        .reviews{
+
+
+            padding: 20px;
+        }
+

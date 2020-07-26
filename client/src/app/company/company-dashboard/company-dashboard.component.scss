@@ -1,0 +1,51 @@
+
+
+.wrapper{
+
+padding-top: 58px;
+padding-bottom: 60px;
+background-color: #eaeaea;
+min-height: 100vh;;
+
+
+
+
+    .vertical{
+
+        height: calc(100vh - 120px);
+        position: fixed;
+        z-index: 10;
+        background-color: white;
+    }
+
+    .right-content{
+      
+        padding-top: 20px;
+        padding-left: 210px;;
+
+        .tab-content{
+            background-color: white;
+            padding: 20px;
+            min-height: 300px;
+                
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+            padding: 1px;
+            
+            border: 1px solid #d4d4d5;
+            
+            border-bottom-left-radius:5px ;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+
+        }
+
+       
+
+       
+
+    }
+   
+    
+}

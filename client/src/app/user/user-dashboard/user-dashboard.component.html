@@ -1,0 +1,41 @@
+
+<app-navbar></app-navbar>
+
+<div class="wrapper">
+
+    <div class="ui vertical menu">
+        <div class="item">
+          <div class="header">User</div>
+          <div class="menu">
+            <a routerLink="/users/me" class="item">View profil</a>
+            <a routerLink="/users/me/edit" class="item">Edit profil</a>            
+          </div>
+        </div>
+        <div class="item">
+          <div class="header">Reviews</div>
+          <div class="menu">
+            <a routerLink="/users/me/reviews" class="item">View all reviews</a>
+          </div>
+        </div>
+        <div class="item">
+          <div class="header">Account</div>
+          <div class="menu">
+            <a routerLink="/users/me/account" class="item">View account</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui grid right-content">
+        
+        <div class="tab-content fourteen wide">
+
+            <router-outlet></router-outlet>  
+
+        </div>              
+
+         
+      </div> 
+</div>
+
+
+<app-footer></app-footer>

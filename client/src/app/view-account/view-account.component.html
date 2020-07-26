@@ -1,0 +1,26 @@
+
+<div class="table-container">
+
+    <h1>Accont Information</h1>
+    <table class="ui single line table">
+        <tbody>
+          <tr>
+            <td class="ui three wide">Username</td>
+            <td class="ui three wide">diaby@gmail.com</td>
+            <td class="ui three wide"><button class="ui button" (click)="showUsernameModal()" >Edit</button></td>            
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td>***********</td>
+            <td class="ui three wide"><button class="ui button" (click)="showPasswordModal()">Edit</button></td>
+          </tr>
+          <tr>
+            <td>Account type</td>
+            <td>Company</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<app-account-modal></app-account-modal>

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-
+const Review = require("./Review");
+//const Reply = require("./Reply");
 
 
 
@@ -8,7 +9,29 @@ const userSchema = mongoose.Schema({
         last_name: String,
         position: String,
         summary: String,
-        reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review"}]
+        loginCredential: {type: mongoose.Schema.Types.ObjectId, ref:"Login"}
+
 })
+
+
+userSchema.virtual("reviews", {
+        ref: "Review",
+        localField:"_id",
+        foreignField:"user"
+})
+
+userSchema.virtual("replies", {
+        ref: "Reply",
+        localField:"_id",
+        foreignField:"user"
+})
+
+
+
+
+
+
+
+
 
 module.exports = mongoose.model("User", userSchema)

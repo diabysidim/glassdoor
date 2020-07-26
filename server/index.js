@@ -2,7 +2,11 @@ const               app             = require('express')(),
                     bodyParser      = require('body-parser'),
                     mongoose        = require('mongoose'),
                     userRoute       = require('./routes/User'),
-                    companyRoute       = require('./routes/Company');
+                    companyRoute    = require('./routes/Company'),
+                    jobRoute        = require('./routes/Job'),
+                    reviewRoute     = require('./routes/Review'),
+                    cors            = require("cors")(),
+                    loginRoute      = require('./routes/Login'); 
 
 
 
@@ -13,10 +17,15 @@ mongoose.connect('mongodb://localhost:27017/glassdoor', {useNewUrlParser: true})
 
 
 
-
+app.use(cors);
 app.use(bodyParser.json()); 
 app.use(userRoute);
 app.use(companyRoute);
+app.use(jobRoute);
+app.use(reviewRoute);
+app.use(loginRoute);
+
+
 
 
 let port = process.env.PORT || 3000
