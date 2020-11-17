@@ -29,6 +29,8 @@ userSchema.virtual("replies", {
 
 
 
+userSchema.set('toObject', { virtuals: true });
+userSchema.set('toJSON', { virtuals: true });
 
 
 

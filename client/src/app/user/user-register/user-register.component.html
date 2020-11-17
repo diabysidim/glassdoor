@@ -4,16 +4,16 @@
        
         <div class="register">
             <h1 class="header massive"> Register </h1>
-            <form class="ui form" (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+            <form class="ui form" (ngSubmit)="onSubmit(userForm)" #userForm="ngForm" ngNativeValidate>
                   
-              
+                <input type="hidden" name="loginCredential" required [ngModel]="profile.userId">
                     <div class="field">
                     <label>First Name</label>
-                      <input type="text" name="firstname" placeholder="First Name" required ngModel>
+                      <input type="text" name="first_name" placeholder="First Name" required ngModel>
                     </div>
                     <div class="field">
                         <label>Last Name</label>
-                      <input type="text" name="lastname" placeholder="lastname" required ngModel>
+                      <input type="text" name="last_name" placeholder="lastname" required ngModel>
                     </div>
 
                     <div class="field">
@@ -27,7 +27,7 @@
                     </div> 
                     
                <div>
-                <button type="button" class="ui button medium left">Cancel</button>
+                <button type="button" (click)="Cancel()" class="ui button medium left">Back</button>
                 <button type="submit" class="ui button right" >Continue</button>
                </div>
                 

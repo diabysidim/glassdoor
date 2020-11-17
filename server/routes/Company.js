@@ -10,9 +10,17 @@ const Job = require("../models/Job");
 
 // get companies 
 
-Router.get("/companies",   (req, res)=>{
+Router.get("/companies",  Auth,   (req, res)=>{
 
-    Company.find({}, (err, Companies)=>{
+        const match ={};
+        console.log(req.query.name)
+        if(req.query.name){
+            
+            console.log(req.query.name)
+            match.company_name = { "$regex": req.query.name, "$options": "i" };
+        }
+
+    Company.find(match, (err, Companies)=>{
 
         if(err){
 
@@ -29,7 +37,7 @@ Router.get("/companies",   (req, res)=>{
 
 // add a company 
 
-Router.post("/companies", async (req, res)=>{
+Router.post("/companies",  Auth, async (req, res)=>{
 
         const RequiredInfo= ["company_name" , "ceo", "headquarters", "sector"];
         const missingInfo =  isMissing(req.body, RequiredInfo);
@@ -59,53 +67,30 @@ Router.post("/companies", async (req, res)=>{
        
 });
 
-// show a company
-Router.get("/companies/mycompany",   (req, res)=>{
 
 
-        
-    Company.find({loginCredential: req.user._id}, (err, company)=>{
+Router.get("/companies/:id/reviews",  Auth, async (req, res)=>{
 
+    try{
 
-        if(err){
-
-            return res.status(500).send("there was an error getting your profile");
-        }
-        if(!company){
-
-            return res.status(404).send("this profile was not found");
-        }
-        else{
-
-            return res.status(200).send(company);
-        }
-
-    })
-})
-
-Router.get("/companies/:id/reviews",  (req, res)=>{
-
-
-        
-    Review.find({company: req.params.id}, (err, reviews)=>{
-
-        if(err){
-
-            return res.status(500).send("there was an error getting the reviews");
-        }
+        const reviews = await Review.find({company: req.params.id}).populate("user").populate("company");
         if(!reviews){
 
             return res.status(404).send("this profile was not found");
         }
-        else{
+        return res.status(200).send(reviews);
+        
+    }
+    catch(e){
 
-            return res.status(200).send(reviews);
-        }
+        return res.status(500).send("there was an error getting the reviews");
 
-    })
+    }
+        
+   
 })
 
-Router.get("/companies/:id/jobs",  (req, res)=>{
+Router.get("/companies/:id/jobs",  Auth,  (req, res)=>{
 
 
         
@@ -131,25 +116,33 @@ Router.get("/companies/:id/jobs",  (req, res)=>{
 
 
 
-Router.get("/companies/:id",  (req, res)=>{
+Router.get("/companies/:id",  Auth, async (req, res)=>{
 
+        try{
 
-        Company.findById(req.params.id, (err, company)=>{
+            const company = await Company.findById(req.params.id).populate({path: 'reviews',
+            populate: {
+              path: 'user',
+              model: 'User'}}).populate("jobs").populate("user");
+              console.log("companies")
 
-            if(err){
-
-                return res.status(500).send("there was an error getting your profile");
-            }
             if(!company){
 
                 return res.status(404).send("this profile was not found");
             }
-            else{
 
-                return res.status(200).send(company);
-            }
+            return res.status(200).send(company);
+        }
 
-        })
+        catch{
+
+            return res.status(500).send("there was an error getting your profile");
+
+        }
+
+       
+
+       
 })
 
 

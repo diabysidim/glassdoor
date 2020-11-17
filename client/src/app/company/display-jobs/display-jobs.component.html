@@ -18,17 +18,17 @@
       <td>{{job.type}}</td>
       <td>{{job.exp_level}}</td>
       <td>{{job.posted_date}}</td>
-      <td>{{job.job_description}}</td> 
+      <td>{{job.job_description}} </td> 
       <td> 
         
         <button (click)="showViewModal(job)" class="ui button green mini">
-          View details
+          View details 
         </button> 
         <br>
-        <button (click)="showUpdateModal(job)" class="ui button blue mini">
-          Edit
+        <button *ngIf="accountId === company_id" (click)="showUpdateModal(job)" class="ui button blue mini">
+          Edit 
         </button> <br>
-        <button (click)="showDeleteModal(job)" class="ui button red mini">
+        <button *ngIf="accountId === company_id" (click)="showDeleteModal(job)" class="ui button red mini">
           Delete
         </button>
 

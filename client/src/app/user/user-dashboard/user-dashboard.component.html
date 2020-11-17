@@ -7,20 +7,20 @@
         <div class="item">
           <div class="header">User</div>
           <div class="menu">
-            <a routerLink="/users/me" class="item">View profil</a>
-            <a routerLink="/users/me/edit" class="item">Edit profil</a>            
+            <a [routerLink]="['/users', user._id]" class="item">View profil</a>
+            <a *ngIf="profile.account_typeId=== user._id" [routerLink]="['/users', user._id, 'edit']" class="item">Edit profil</a>            
           </div>
         </div>
         <div class="item">
           <div class="header">Reviews</div>
           <div class="menu">
-            <a routerLink="/users/me/reviews" class="item">View all reviews</a>
+            <a [routerLink]="['/users', user._id, 'reviews']" class="item">View all reviews</a>
           </div>
         </div>
-        <div class="item">
+        <div *ngIf="profile.account_typeId=== user._id" class="item">
           <div class="header">Account</div>
           <div class="menu">
-            <a routerLink="/users/me/account" class="item">View account</a>
+            <a  [routerLink]="['/users', user._id, 'account']" class="item">View account</a>
           </div>
         </div>
       </div>

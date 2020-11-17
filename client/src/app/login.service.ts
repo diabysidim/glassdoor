@@ -43,7 +43,7 @@
   
     updateAccount(id:string, data) : Observable<Users>{
   
-      return this.http.put<Users>(this._URL+"/"+id, data).pipe(catchError(this.errorHandler));
+      return this.http.put<Users>(this._URL+"logins/"+id, data).pipe(catchError(this.errorHandler));
     }
   
     deleteJob (id:string) {
@@ -54,6 +54,7 @@
     isLoggedIn(){
 
       return !!localStorage.getItem("token")
+
     }
   
   

@@ -4,6 +4,7 @@ import $ from 'jquery';
 import { from } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
+import { Users } from 'src/app/User';
 @Component({
   selector: 'app-company-dashboard',
   templateUrl: './company-dashboard.component.html',
@@ -15,62 +16,65 @@ export class CompanyDashboardComponent implements OnInit {
 
   company_id:string;
   company: any={};
+  profile: any;
 
   constructor( private companyData: CompanyService, private route: ActivatedRoute, private router: Router ) { }
 
-  ngOnChanges(){
-
-    // this.route.params.subscribe((params: Params)=>{
-
-    //   this.company_id = params["id"]
-
-    
-
-    // }, (err)=>{}, ()=>{
-
-    //   this.getCompany(this.company_id);
-    // })
-    console.log("changes")
-  }
-
   ngOnInit(): void {   
 
-    this.route.params.subscribe((params: Params)=>{
+    console.log("in dashboard")
+    this.route.data.subscribe(data=>{
 
-      this.company_id = params["id"]
+      console.log(data["Company"], data["profile"])
+      this.company = data["Company"];
+      this.company_id = this.company._id;
+      this.profile = data["profile"]
 
-    
+      
 
-    }, (err)=>{}, ()=>{
+    },(error)=>{
 
-      this.getCompany(this.company_id);
-    })
+      console.log("i'm in error please")
+      if(error instanceof HttpResponse){
 
-    console.log("init")
-  
-  
-  }
-
-  getCompany(id):void{
-
-  
-    this.companyData.fetchCompanyById(id).subscribe( company=>{
-
-      this.company = company;
-    }, (error)=>{
-
-        if(error instanceof HttpResponse) {
-  
-            if(error.status === 404){
-
-              this.router.navigate["/404"]
-            }
-  
+        if(error.status === 401){
+          this.logout();
         }
+        else if(error.status === 404 || error.status=== 500 ){
+
+          this.router.navigate(["/404"])
+        }
+      }
+    })
+  }
+
+  logout(){
+
+      localStorage.clear();
+      this.router.navigate(["/"])
+
+  }
+
+  // getCompany(id):void{
+
+  
+  //   this.companyData.fetchCompanyById(id).subscribe( company=>{
+
+  //     this.company = company;
+  //   }, (error)=>{
+
+  //       if(error instanceof HttpResponse) {
+  
+  //           if(error.status === 404){
+
+  //             this.router.navigate["/404"]
+  //           }
+  
+  //       }
     
 
 
-      })
-  }
+  //     })
+  // }
 
 }

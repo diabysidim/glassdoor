@@ -18,9 +18,9 @@ export class JobsService {
   private _URL2 = "http://localhost:3000/companies"
   constructor(private http: HttpClient) { }
 
-  fetchJobs(): Observable<Jobs[]>{
+  fetchJobs(id?): Observable<Jobs[]>{
 
-    return this.http.get<Jobs []>(this._URL).pipe(catchError(this.errorHandler));
+    return this.http.get<Jobs []>(this._URL+"?name="+id).pipe(catchError(this.errorHandler));
   }
 
   fetchJobsByCompanyId(id): Observable<Jobs[]>{

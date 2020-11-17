@@ -7,15 +7,7 @@
         <div class="ui mini statistics">
             <div class="statistic">
               <div class="value">
-                {{company.__v}}
-              </div>
-              <div class="label">
-                Views
-              </div>
-            </div>
-            <div class="statistic">
-              <div class="value">
-                31,200
+               {{company.jobs.length}}
               </div>
               <div class="label">
                 Jobs
@@ -23,7 +15,7 @@
             </div>
             <div class="statistic">
               <div class="value">
-                22
+                {{company.reviews.length}}
               </div>
               <div class="label">
                Reviews
@@ -35,40 +27,36 @@
       <div class="company-data" >
           
         <h1 class="ui header large h1">Company's Info</h1>
-          <div class="ui table-data grid ">
+          <div class=" table-data  ">
 
             
-            <table class="ui ten wide">
 
-                <tr>
-                    <td class="title"> CEO </td>
-                    <td>{{company.ceo}}</td>
-                </tr>
-                <tr>
-                    <td class="title">Headquarters</td>
-                    <td>{{company.headquarters}}</td>
-                </tr>
-                <tr>
-                    <td class="title">Size</td>
-                    <td>{{company.size}}</td>
-                </tr>
-                <tr>
-                    <td class="title">Founded</td>
-                    <td>{{company.founded}}</td>
-                </tr>
-                <tr>
-                    <td class="title">Sector</td>
-                    <td>{{company.sector}}</td>
-                </tr>
-                <tr>
-                    <td class="title">Revenue</td>
-                    <td>{{company.revenue}}</td>
-                </tr>
+               
+                    <td  id="td" class="title"> CEO </td>
+                    <td id="td" >{{company.ceo}}</td>
+             
+              
+                    <td  id="td" class="title">Headquarters</td>
+                    <td id="td" >{{company.headquarters}}</td>
+               
+           
+                    <td id="td"  class="title">Size</td>
+                    <td id="td" >{{company.size}}</td>
+              
+               
+                    <td id="td"  class="title">Founded</td>
+                    <td id="td" >{{company.founded}}</td>
                 
+                    <td  id="td" class="title">Sector</td>
+                    <td id="td" >{{company.sector}}</td>
+               
+                    <td id="td"  class="title">Revenue</td>
+                    <td id="td" >{{company.revenue}}</td>
+                        
                
 
 
-           </table>
+           
 
           </div>
 
@@ -82,53 +70,40 @@
 
       </div>
 
-      <div class="reviews">
+      <div class="reviews" >
           <h1 class="ui header large ">Reviews</h1>
-        <div class="ui comments">
+        <div class="ui comments" *ngFor="let review of company.reviews">
             <div class="comment">
               <a class="avatar">
-                <img src="/images/avatar/small/joe.jpg">
+                <img src="../../../assets/image/business-suit.jpg">
               </a>
               <div class="content">
-                <a class="author">Joe Henderson</a>
-                <div class="metadata">
-                  <div class="date">1 day ago</div>
-                </div>
+                <a [routerLink]="['/users', review.user._id]" class="author">{{review.user.first_name}} {{review.user.last_name}}</a>
+              
                 <div class="text">
-                  <p>The hours, minutes and seconds stand as visible reminders that your effort put them all there. </p>
-                  <p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
+                  <p>{{review.content}} </p>
+                  
                 </div>
                 <div class="actions">
-                  <a class="reply">Reply</a>
+            
                 </div>
               </div>
             </div>
-            <div class="comment">
-              <a class="avatar">
-                <img src="/images/avatar/small/christian.jpg">
-              </a>
-              <div class="content">
-                <a class="author">Christian Rocha</a>
-                <div class="metadata">
-                  <div class="date">2 days ago</div>
-                </div>
-                <div class="text">
-                  I re-tweeted this.
-                </div>
-                <div class="actions">
-                  <a class="reply">Reply</a>
-                </div>
-              </div>
-            </div>
-            <form class="ui reply form">
-              <div class="field">
-                <textarea></textarea>
-              </div>
-              <div class="ui primary submit labeled icon button">
-                <i class="icon edit"></i> Add Comment
-              </div>
-            </form>
-          </div>
+            
+
+      </div>
+
+      <form *ngIf="profile.type!=='company'" class="ui reply form" (ngSubmit)="onSubmit(form)" #form="ngForm" ngNativeValidate >
+        <input type="hidden" name="company" [ngModel]="company._id">
+        <input type="hidden" name="user" [ngModel]="profile.account_typeId">
+
+        <div class="field">
+          <textarea spellcheck="false" name="content" [ngModel]="comment" required></textarea>
+        </div>
+        
+         <button class="ui button blue" type="submit"> Add a review</button> 
+     
+      </form>
 
       </div>
   

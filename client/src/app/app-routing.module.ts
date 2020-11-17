@@ -22,10 +22,15 @@ import { AuthGuard } from './auth.guard';
 import {CompanyResolver} from "./company/company-resolver.service";
 import {CompanyResolverChildren} from "./company/company-resolver-chlidren.service";
 import {NavbarResolver} from "./navbar/navbar-resolver.service";
+import { UserResolver } from './user/user-resolver.service';
+import { UserResolverChildren } from './user/user-resolver-children.service';
+import { HomeDashboardComponent } from './home-dashboard/home-dashboard.component';
+import {SearchResolver} from "./home-dashboard/home-resolver.service"
 
 const routes: Routes = [
   {path:"", component: HomeComponent, resolve: {profile: NavbarResolver}},
-  {path:"register", component: RegisterComponent},
+  {path:"search", component: HomeDashboardComponent, resolve:{ profile: NavbarResolver, search: SearchResolver}},
+  {path:"register", component: RegisterComponent, resolve: {profile: NavbarResolver}},
   {path:"companies", component: CompanyComponent, resolve: {profile: NavbarResolver}, children:[
 
     {path:"register", component: CompanyRegisterComponent, pathMatch:"full"},
@@ -43,14 +48,14 @@ const routes: Routes = [
   ]},
 
   {path:"users", component: UserComponent , children:[
-    {path:"register", component: UserRegisterComponent},
+    {path:"register", component: UserRegisterComponent, resolve: {profile: NavbarResolver}},
 
-    {path:":id", component: UserDashboardComponent, canActivate: [AuthGuard], canActivateChild:[AuthGuard], children:[
+    {path:":id", component: UserDashboardComponent, resolve: {User: UserResolver , profile: NavbarResolver}, canActivate: [AuthGuard], canActivateChild:[AuthGuard], children:[
 
-      {path:"", component: UserProfileComponent, canActivate: [AuthGuard], canActivateChild:[AuthGuard]},
-      {path:"edit", component: UserEditComponent},
-      {path:"account", component: ViewAccountComponent},
-      {path:"reviews", component: UserReviewComponent}
+      {path:"", component: UserProfileComponent,  resolve: {User: UserResolver , profile: NavbarResolver}, canActivate: [AuthGuard], canActivateChild:[AuthGuard]},
+      {path:"edit", component: UserEditComponent,  resolve: {User: UserResolverChildren , profile: NavbarResolver}},
+      {path:"account", component: ViewAccountComponent,  resolve: {User: UserResolverChildren , profile: NavbarResolver}},
+      {path:"reviews", component: UserReviewComponent,  resolve: {User: UserResolverChildren , profile: NavbarResolver}}
 
     ]},
    

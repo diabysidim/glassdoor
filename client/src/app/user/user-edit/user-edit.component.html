@@ -4,31 +4,32 @@
        
         <div class="register">
             <h1 class="header massive"> Register your company</h1>
-            <form class="ui form">
-                  
+            <form class="ui form" (ngSubmit)="submit(form)" #form="ngForm">
+
+                    <input type="hidden" name="_id" [ngModel]="user._id">
               
                     <div class="field">
                     <label>First Name</label>
-                      <input type="text" name="firstname" placeholder="First Name" required>
+                      <input type="text" name="first_name" placeholder="First Name" required [ngModel]="user.first_name">
                     </div>
                     <div class="field">
                         <label>Last Name</label>
-                      <input type="text" name="lastname" placeholder="lastname" required>
+                      <input type="text" name="last_name" placeholder="lastname" required [ngModel]="user.last_name">
                     </div>
 
                     <div class="field">
                         <label>Role</label>
-                        <input type="text" name="position" placeholder="role">    
+                        <input type="text" name="position" placeholder="role" [ngModel]="user.position">    
                     </div> 
 
                     <div class="field">
                         <label>Summary</label>
-                        <textarea name="summary" placeholder="Summary"required> </textarea>    
+                        <textarea name="summary" placeholder="Summary"required [ngModel]="user.summary"> </textarea>    
                     </div> 
                     
                <div>
                 <button routerLink="/" class="ui button medium left"> Cancel </button>
-                <button class="ui button right" tabindex="0">Continue</button>
+                <button class="ui button blue right" type="submit" tabindex="0">Update</button>
                </div>
                 
               </form>

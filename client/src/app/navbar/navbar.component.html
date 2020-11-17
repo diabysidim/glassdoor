@@ -1,17 +1,48 @@
 
 
     <div class="ui top fixed menu navbar">
-        <div class="header huge item ">
+        <a *ngIf="profile" routerLink="/search" class="header huge item ">
             GlassdoorSMD
-        </div>
-        <a routerLink="/about" class="item">About us</a>
-        <a routerLink="/testimonials" class="item">Testimonials</a>
+        </a>
+        <a *ngIf="!profile" routerLink="/" class="header huge item ">
+            GlassdoorSMD
+        </a>
+
+        
+
+        
+            <div *ngIf="profile" class="center menu fluid">
+
+                <form class="form search-box" (ngSubmit)="onSubmit(form)" #form="ngForm">
+                    
+                        <div class="ui fluid category search">
+                            <div class="ui icon input">
+                            <input class="prompt" type="text" name="search" placeholder="Search job, company, users..." ngModel>
+                           
+                            </div>
+                            
+                        </div>
+            
+                        <select  id="drop"class="ui dropdown"  name="type" [ngModel]="type">
+                            <option name="type" value="job">Job</option>
+                            <option name="type" value="company">Company</option>
+                            <option name="type" value="user">User</option>
+                        </select>
+                        <button class="ui button" type="submit">Search</button>
+                    
+                </form>
+            </div>
+            
+            
+        
+        <!-- <a routerLink="/about" class="item">About us</a>
+        <a routerLink="/testimonials" class="item">Testimonials</a> -->
         <div class="right menu">
             <a *ngIf="!profile" (click)="displaySigninModal()" class="item">Sign-in</a>
             <a *ngIf="!profile" routerLink="/register" class="item">Register</a>
 
-            <a *ngIf="profile && profile.type=== 'company'" [routerLink]="['/companies', profile.account_typeId]" class="item">My Company</a>
-            <a *ngIf="profile && profile.type=== 'user'" [routerLink]="['/companies', profile.account_typeId]" class="item">My Company</a>
+            <a *ngIf="profile && profile.type=== 'company'" [routerLink]="['/companies', profile.account_typeId]" class="item">My company</a>
+            <a *ngIf="profile && profile.type=== 'user'" [routerLink]="['/users', profile.account_typeId]" class="item">My profile</a>
             <a *ngIf="profile" (click)="logout()" routerLink="/" class="item">Logout </a>
             
         </div>   

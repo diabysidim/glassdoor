@@ -1,0 +1,22 @@
+
+<div class="users-container">
+
+    <div class="ui horizontal fluid card card-container" *ngFor="let user of result">
+        <div class="image">
+          <img src="../../assets/image/business-suit.jpg">
+        </div>
+        <div class="content">
+          <a class="header" [routerLink]="['/users', user._id]" >{{user.first_name}} {{user.last_name}}</a>
+          <div class="meta">
+            <span class="category">User</span>
+          </div>
+          <div class="description">
+                {{user.summary}}
+          </div>
+        </div>
+      </div>
+
+</div>
+
+
+

@@ -12,7 +12,12 @@ const               app             = require('express')(),
 
 
 // Use connect method to connect to the server
-mongoose.connect('mongodb://localhost:27017/glassdoor', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/glassdoor', {useNewUrlParser: true}).then(res=>{
+
+    console.log(res)
+}).catch(err=>{
+    console.log(err);
+});
 
 
 

@@ -14,9 +14,10 @@ const Auth = require("../middelwares/Auth");
 
 
 
+
 // add a review 
 
-Router.post("/reviews", async (req, res)=>{
+Router.post("/reviews",  Auth, async (req, res)=>{
 
 
 
@@ -46,7 +47,7 @@ Router.post("/reviews", async (req, res)=>{
 // update Review 
 
 
-Router.put("/reviews/:id", async (req, res)=>{
+Router.put("/reviews/:id",  Auth, async (req, res)=>{
 
   
 
@@ -78,7 +79,7 @@ Router.put("/reviews/:id", async (req, res)=>{
 
 // delete
 
-Router.delete("/reviews/:id", async (req, res)=>{
+Router.delete("/reviews/:id",  Auth, async (req, res)=>{
 
 
         try{

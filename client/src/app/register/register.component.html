@@ -4,7 +4,7 @@
        
         <div class="register">
             <h1 class="header massive"> Registration</h1>
-            <form class="ui form" (ngSubmit)=onSubmit(formRegister) #formRegister="ngForm">
+            <form class="ui form" (ngSubmit)=onSubmit(formRegister) #formRegister="ngForm" ngNativeValidate>
                           
                   
                     <div class="field">
@@ -13,11 +13,11 @@
                     </div>
                     <div class="field">
                         <label>Password</label>
-                      <input type="text" name="password" placeholder="password" required ngModel>
+                      <input type="password" name="password" placeholder="password" required ngModel>
                     </div>
                     <div class="field">
                         <label> Password Confirmation </label>
-                        <input type="text" name="passwordConf" placeholder="Password Confirmation"required ngModel>
+                        <input type="password" name="passwordConf" placeholder="Password Confirmation"required ngModel>
     
                     </div>  
                     <div class=" field">

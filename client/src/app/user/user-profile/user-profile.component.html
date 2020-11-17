@@ -3,29 +3,22 @@
     
     <div class="image"></div>
 
-    <p><span class="ui big red text">Sidi Diaby</span></p>
+    <p><span class="ui big red text">{{user.first_name}} {{user.last_name}}</span></p>
 
         <div class="ui mini statistics">
             <div class="statistic">
               <div class="value">
-                22
+                {{user.reviews.length}}
               </div>
               <div class="label">
               Reviews
               </div>
             </div>
-            <div class="statistic">
-              <div class="value">
-                31,200
-              </div>
-              <div class="label">
-                Views
-              </div>
-            </div> 
+           
     </div>
 
-    <p><span class="ui medium text">Software engineer</span></p>
-     <p><span class="ui medium text"> hello Mike nd the new recruit </span></p>
+    <p><span class="ui medium text">{{user.position}}</span></p>
+     <p><span class="ui medium text"> {{user.summary}} </span></p>
     
 
         

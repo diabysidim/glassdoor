@@ -80,7 +80,8 @@ companySchema.virtual("replies", {
 })
 
 
-
+companySchema.set('toObject', { virtuals: true });
+companySchema.set('toJSON', { virtuals: true });
 
 
 

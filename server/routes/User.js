@@ -2,13 +2,24 @@
 
 const Router = require("express").Router();
 const User =  require("../models/User");
+const Review = require('../models/Review')
 const Auth = require("../middelwares/Auth");
+const Company = require("../models/Company");
 
 // get all users
 
+
+
 Router.get("/users",  (req, res) => {
 
-    User.find({}, (err, users)=>{
+    const match ={};
+    console.log(req.query.name)
+    if(req.query.name){
+        
+        match.first_name = { "$regex": req.query.name, "$options": "i" };
+    }
+
+    User.find(match, (err, users)=>{
 
         if(err){
 
@@ -23,32 +34,50 @@ Router.get("/users",  (req, res) => {
    
 })
 
+Router.get("/users/:id/reviews",  async (req, res)=>{
 
+
+        try{
+            const reviews = await Review.find({user: req.params.id}).populate("user").populate("company");
+            if(!reviews){
+
+                return res.status(404).send("this profile was not found");
+            }
+
+            console.log(reviews);
+            return res.status(200).send(reviews);
+        }
+        catch{
+            return res.status(500).send("there was an error getting the reviews");
+
+        }
+   
+    })
 // get user 
 
 
-Router.get("/users/:id", Auth , (req, res)=>{
+Router.get("/users/:id", Auth , async (req, res)=>{
 
 
-        User.findById( req.params.id , (err, user) =>{
+        try{
 
-
-            if(err){
-
-                return res.status(500).send("There was an error");
-            }
+            const user= await  User.findById( req.params.id).populate("reviews");
 
             if(user===null){
 
                 return res.status(404).send("User not found");
             }
-            else{
+            
+            return res.status(200).send(user);
+        }
+        catch(e){
 
-                return res.status(200).send(user);
-            }
+            console.log(e)
 
+            return res.status(500).send("There was an error");
+        }
 
-        } )   
+          
 
        
 
@@ -65,7 +94,7 @@ Router.post("/users", Auth,  (req, res)=>{
       const newUser= { ...req.body}
 
 
-        User.create(newUser, (err)=>{
+        User.create(newUser, (err, user)=>{
 
             if(err){
                 console.log("there was an error: " + err)
@@ -73,11 +102,12 @@ Router.post("/users", Auth,  (req, res)=>{
             }
 
             console.log("extrait added");
+            return res.status(200).send(user)
         });     
        
 
 
-    return res.status(200).send(newUser)
+    
 
 
 })
@@ -85,10 +115,10 @@ Router.post("/users", Auth,  (req, res)=>{
 
 // update user 
 
-Router.put("/users/me", Auth, (req, res)=>{
+Router.put("/users/:id", Auth, (req, res)=>{
 
 
-        User.findAndUpdate({loginCredential: req.user._id}, req.body,{new: true}, (err, user)=>{
+        User.findOneAndUpdate({loginCredential: req.user._id}, req.body,{new: true}, (err, user)=>{
 
         if(err){
 

@@ -64,8 +64,9 @@
     </div>
             <form class="ui form" (ngSubmit)="updateJob(form)" #form="ngForm">
 
-              <input type="hidden" name="company"  [ngModel]="job.company" required> 
-              <input type="hidden" name="_id"  [ngModel]="job._id" required>
+                    <input type="hidden" name="company"  [ngModel]="job.company" required> 
+                    <input type="hidden" name="_id"  [ngModel]="job._id" required>
+
                     <div class="field">
                     <label> Job Title</label>
                       <input type="text" name="job_title" placeholder="Job Title" [ngModel]="job.job_title" required  > 

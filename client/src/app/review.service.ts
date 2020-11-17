@@ -16,6 +16,8 @@ export class ReviewService {
   
   private _URL= "http://localhost:3000/Reviews";
   private _URL2 = "http://localhost:3000/companies"
+  private _URL3 = "http://localhost:3000/users"
+
 
   constructor(private http: HttpClient) { }
 
@@ -33,11 +35,18 @@ export class ReviewService {
 
     return this.http.get<Reviews []>(this._URL2+"/"+ id +"/reviews").pipe(catchError(this.errorHandler));
   }
+
+  fetchReviewByUserId(id): Observable<any[]>{
+
+    console.log("finding nemo")
+
+    return this.http.get<any[]>(this._URL3+"/"+ id +"/reviews").pipe(catchError(this.errorHandler));
+  }
   
 
-  postReview(id:string, data): Observable<Reviews[]>{
+  postReview( data): Observable<Reviews>{
 
-    return this.http.post<Reviews []>(this._URL+"/"+id, data).pipe(catchError(this.errorHandler));
+    return this.http.post<Reviews>(this._URL, data).pipe(catchError(this.errorHandler));
   }
 
   updateReview(id:string, data) : Observable<Reviews[]>{

@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {CompanyService} from "../company.service";
 import $ from 'jquery';
 import { from } from 'rxjs';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
+import { ReviewService } from 'src/app/review.service';
 @Component({
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
-  styleUrls: ['./company-profile.component.scss']
+  styleUrls: ['./company-profile.component.scss'],
+  providers: [CompanyService]
 })
 export class CompanyProfileComponent implements OnInit {
   company_id:string;
   company: any;
-  constructor( private companyData: CompanyService, private route: ActivatedRoute ) { }
+  profile: any;
+  comment: string;
+  constructor( private companyData: CompanyService, 
+     private route: ActivatedRoute, 
+     private router: Router ,
+     private reviewService: ReviewService) { }
+
 
   ngOnInit(): void {
 
@@ -24,55 +32,68 @@ export class CompanyProfileComponent implements OnInit {
         maxRating: 5
       });
     });
-
+   
 
     this.route.data.subscribe(
+     
       (data)=>{
 
           console.log(data);
           this.company = data["Company"]
+          this.profile = data["profile"];
 
-      }
-    )
-
-
-    // this.route.parent.paramMap.subscribe((params: ParamMap)=>{
-      
-     
-    //   this.company_id = params.get("id");
-    //   console.log(this.company_id)
-
-    //   this.getCompany(this.company_id);
-
-    // }, (error)=>{
-
-    //   if(error instanceof HttpResponse) {
-
-    //       if(error.status === 404)
-
-    //   }
-
-
-    // })
+      }, (error)=>{
+          
+        if(error instanceof HttpResponse){
   
+          if(error.status === 401){
+
+          
+            this.logout();
+          }
+          else if(error.status === 404 || error.status=== 500 ){
+            
+            
+            this.router.navigate(["/404"])
+          }
+        }
+      })
+    }
   
-  }
-
-  getCompany(id):void{
-
-    this.companyData.fetchCompanyById(id).subscribe( company=>{
-
-      this.company = company;
-    
-
-    }, (error:any)=>{
-
-
-      console.log(error);
+    logout(){
+  
+        localStorage.clear();
+        this.router.navigate(["/"])
+  
     }
 
+    onSubmit(e){
 
-    )
+   
+
+      this.reviewService.postReview(e.value).subscribe(data=>{
+
+        this.needsRefresh()
+        console.log(data)
+
+      })
+      
+    }
+
+    needsRefresh(){
+
+      this.companyData.fetchCompanyById(this.company._id).subscribe(data=>{
+
+          this.company = data;
+          this.comment ="";
+
+      })
+    }
+  
+  
   }
 
-}
+ 
+  
+
+

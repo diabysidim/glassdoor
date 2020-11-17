@@ -6,6 +6,7 @@ import { from } from 'rxjs';
 
 import {JobsService} from "../../jobs.service";
 import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
+import { Users } from 'src/app/user/UserType';
 
 @Component({
   selector: 'app-display-jobs',
@@ -15,7 +16,7 @@ import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 })
 export class DisplayJobsComponent implements OnInit {
   public jobList: any[];
-
+  accountId: string;
   @ViewChild(JobModalComponent)  jobModal
   company_id: string;
   constructor(private JobsData: JobsService, private route: ActivatedRoute) {   }
@@ -28,7 +29,18 @@ export class DisplayJobsComponent implements OnInit {
         this.company_id= paramMap.get("id");
         this.fetchJobsByCompanyId(this.company_id);
 
+        
+        
+        this.accountId = localStorage.getItem("account_typeId");
+
+        console.log(this.company_id);
+        console.log(this.accountId)
+
+       
+
     })
+
+    
     
 
    

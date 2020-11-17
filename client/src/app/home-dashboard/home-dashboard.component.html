@@ -1,1 +1,8 @@
-<p>home-dashboard works!</p>
+
+
+<app-navbar (myEvent)="updateSearch($event)" ></app-navbar>
+<div class="ui container search-container">
+    <app-job-search *ngIf="!(type==='company' || type==='user')" [result]="result" ></app-job-search>
+    <app-company-search *ngIf="type=== 'company'" [result]="result"></app-company-search>
+    <app-user-search *ngIf="type==='user'" [result]="result"></app-user-search>
+</div>

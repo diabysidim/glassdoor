@@ -4,6 +4,7 @@ const Router = require("express")();
 const Job = require("../models/Job");
 const Company = require("../models/Company");
 const User = require("../models/User");
+const Auth = require("../middelwares/Auth")
 
 
 
@@ -12,9 +13,17 @@ const User = require("../models/User");
 
 // get Jobs 
 
-Router.get("/jobs", (req, res)=>{
+Router.get("/jobs", Auth, (req, res)=>{
 
-    Job.find({}, (err, jobs)=>{
+    const match ={};
+    console.log(req.query.name)
+    if(req.query.name){
+        
+        console.log(req.query.name)
+        match.job_title = { "$regex": req.query.name, "$options": "i" };
+    }
+
+    Job.find(match, (err, jobs)=>{
 
         if(err){
 
@@ -33,7 +42,7 @@ Router.get("/jobs", (req, res)=>{
 
 // add a Job 
 
-Router.post("/jobs", async (req, res)=>{
+Router.post("/jobs",  Auth, async (req, res)=>{
 
 
 
@@ -64,7 +73,7 @@ Router.post("/jobs", async (req, res)=>{
 // show a Job
 
 
-Router.get("/jobs/:id", (req, res)=>{
+Router.get("/jobs/:id",  Auth, (req, res)=>{
 
 
         Job.findById(req.params.id, (err, Job)=>{
@@ -89,7 +98,7 @@ Router.get("/jobs/:id", (req, res)=>{
 // update Job 
 
 
-Router.put("/jobs/:id", async (req, res)=>{
+Router.put("/jobs/:id",  Auth, async (req, res)=>{
 
   
 
@@ -131,7 +140,7 @@ Router.put("/jobs/:id", async (req, res)=>{
 
 // delete
 
-Router.delete("/jobs/:id", async (req, res)=>{
+Router.delete("/jobs/:id",  Auth, async (req, res)=>{
 
 
         try{

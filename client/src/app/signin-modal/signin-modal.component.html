@@ -1,16 +1,16 @@
 <div  id="signinModal" class="ui mini modal">
     <i class="close icon"></i>
     <div class="header">
-      Profile Picture
+      Signin
     </div>
-    <form class="ui form" (ngSubmit)="submit(form)" #form="ngForm">
+    <form class="ui form" (ngSubmit)="submit(form)" #form="ngForm" ngNativeValidate>
       <div class="field">
         <label>Username</label>
-        <input type="text" name="username" placeholder="Username" Email ngModel>
+        <input type="text" name="username" placeholder="Username" Email ngModel required> 
       </div>
       <div class="field">
         <label >Password</label>
-        <input type="text" name="password" placeholder="Password" ngModel>
+        <input type="password" name="password" placeholder="Password" ngModel required>
       </div>
       
       <button class="ui button" type="submit">Submit</button>

@@ -1,0 +1,10 @@
+<div class="ui cards company-container" *ngFor="let company of result">
+    <div class="card">
+      <div class="content">
+        <a  [routerLink]="['/companies', company._id]" class="header">{{company.company_name}}</a>
+        <div class="meta">Company</div>
+        <div class="description">
+          {{company.description}}
+        </div>
+      </div>
+    </div>

@@ -28,11 +28,20 @@ export class RegisterComponent implements OnInit {
 
   registerAccount(account): void{
 
+      console.log(account)
     this.loginService.handleRegister(account).subscribe( data =>{
 
 
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.token)
+        localStorage.setItem("userId", data.user._id);
+        localStorage.setItem("token",data.token);
+        localStorage.setItem("type", data.user.type);
+        localStorage.setItem("username", data.user.username);
+
+        localStorage.setItem("account_typeId", data.relatedProfile)
+      
+
+    
+    }, err=>{}, ()=>{
 
       if(account.type ==="company"){
 

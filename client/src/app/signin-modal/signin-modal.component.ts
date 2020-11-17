@@ -32,9 +32,9 @@ export class SigninModalComponent implements OnInit {
         localStorage.setItem("token",data.token);
         localStorage.setItem("type", data.user.type);
         localStorage.setItem("account_typeId", data.relatedProfile)
-      
+        localStorage.setItem("username", data.user.username)
 
-
+        console.log(data)
 
     }, (err)=>{
 
@@ -54,7 +54,7 @@ export class SigninModalComponent implements OnInit {
     this.router.navigate([`/companies/${this.profile.relatedProfile}`])
   }
 
-  else this.router.navigate[`/users/${this.profile.relatedProfile}`];
+  else this.router.navigate([`/users/${this.profile.relatedProfile}`]);
  }
 
 }

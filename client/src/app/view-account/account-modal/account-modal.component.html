@@ -1,12 +1,12 @@
 <div  id="updateUsernameModal" class="ui mini modal">
     <i class="close icon"></i>
 
-            <form class="ui form" (ngSubmit)="updateUsername(formUser)" #formUser="ngForm">
+            <form class="ui form" (ngSubmit)="updateUsername(formUser)" #formUser="ngForm"ngNativeValidate>
 
                 <div class="field">
                 <label>Username</label>
-                    <input type="text" name="username" placeholder="Job Title"  required  > 
-                     <!-- [ngModel]="loginCredential.username" -->
+                    <input type="text" name="username" placeholder="Username"  required [ngModel]="profile.username"  > 
+        
                 </div>
                 
                <div>
@@ -23,7 +23,7 @@
                 <div class="header">
                   Edit password
                 </div>
-                    <form class="ui form" (ngSubmit)="updatePassword(formPassword)" #formPassword="ngForm">
+                    <form class="ui form" (ngSubmit)="updatePassword(formPassword)" #formPassword="ngForm" ngNativeValidate>
         
         
                         <div class="field">

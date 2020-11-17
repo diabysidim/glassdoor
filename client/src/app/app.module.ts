@@ -38,6 +38,12 @@ import {AuthGuard} from "./auth.guard";
 import { CompanyResolver } from './company/company-resolver.service';
 import { CompanyResolverChildren } from './company/company-resolver-chlidren.service';
 import { NavbarResolver } from './navbar/navbar-resolver.service';
+import{UserResolver} from "./user/user-resolver.service";
+import {UserResolverChildren} from "./user/user-resolver-children.service";
+import { JobSearchComponent } from './job-search/job-search.component';
+import { CompanySearchComponent } from './company-search/company-search.component';
+import { UserSearchComponent } from './user-search/user-search.component';
+import { SearchResolver } from './home-dashboard/home-resolver.service';
 
 declare var $: any;
 
@@ -69,6 +75,9 @@ declare var $: any;
     AccountModalComponent,
     JobModalComponent,
     ErrorPageComponent,
+    JobSearchComponent,
+    CompanySearchComponent,
+    UserSearchComponent,
    
   ],
   imports: [
@@ -81,7 +90,7 @@ declare var $: any;
     provide: HTTP_INTERCEPTORS,
     useClass: RequestInterceptorService,
     multi:true
-  }, AuthGuard, CompanyResolver, CompanyResolverChildren, NavbarResolver],
+  }, AuthGuard, CompanyResolver, CompanyResolverChildren, NavbarResolver, UserResolver, UserResolverChildren, SearchResolver ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

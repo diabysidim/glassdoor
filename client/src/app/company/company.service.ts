@@ -7,6 +7,7 @@ import {catchError, tap} from 'rxjs/operators';
 
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Companies } from "./Companies";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,12 @@ export class CompanyService {
     return this._refreshNeeded;
   }
   private _URL= "http://localhost:3000/Companies";
-  constructor(private http: HttpClient) { }
+  
+  constructor(private http: HttpClient, private router: Router) { }
 
-  fetchCompanies(): Observable<Companies[]>{
+  fetchCompanies(id?): Observable<Companies[]>{
 
-    return this.http.get<Companies []>(this._URL).pipe(catchError(this.errorHandler))
+    return this.http.get<Companies []>(this._URL+"?name="+id).pipe(catchError(this.errorHandler))
 
    
   }
@@ -37,9 +39,9 @@ export class CompanyService {
 
   
 
-  postCompany(id:string, data): Observable<Companies[]>{
+  postCompany(data): Observable<Companies>{
 
-    return this.http.post<Companies []>(this._URL+"/"+id, data).pipe(catchError(this.errorHandler));
+    return this.http.post<Companies>(this._URL, data).pipe(catchError(this.errorHandler));
   }
 
   updateCompany(id:string, data) : Observable<Companies>{
@@ -52,12 +54,25 @@ export class CompanyService {
     return this.http.delete(this._URL+"/"+id);
   }
 
+  logout(){
+
+    localStorage.clear();
+    this.router.navigate(["/"])
+  
+  }
 
 
 
   errorHandler(error: HttpErrorResponse){
+  
 
-      return throwError(error.message || "Server Error");
+      console.log("in error handler")
+  
+       
+      return throwError(error || "Server Error");
 
-  }
+
 }
+
+}
+

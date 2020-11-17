@@ -16,7 +16,6 @@ export class CompanyResolver implements Resolve<Companies> {
   constructor(private companyService: CompanyService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Companies>  {
-      console.log(route.params['id'])
     return this.companyService.fetchCompanyById(route.params['id']);
   }
 }

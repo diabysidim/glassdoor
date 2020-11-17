@@ -12,3 +12,24 @@
     padding-top: 60px;
     filter: grayscale(0.8);;
 }
+
+.search-box{
+
+    display: flex;
+    justify-content: center;;
+    align-items: center;
+    .search{
+
+        margin-right: 10px;;
+    }
+
+    #drop{
+
+       margin-right: 10px;
+    }
+
+    button{
+        margin-left: 10px;
+    }
+
+}

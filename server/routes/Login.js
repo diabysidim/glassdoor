@@ -5,6 +5,7 @@ const Auth = require("../middelwares/Auth");
 const Company = require("../models/Company");
 const Review = require("../models/Review");
 const Job= require("../models/Job");
+const { findByIdAndUpdate } = require("../models/Job");
 
 
 const findRelatedProfile= async (user)=>{
@@ -86,6 +87,27 @@ Router.post("/register", async (req, res)=>{
 
 // login
 
+Router.put("/logins/:id",  Auth, async (req, res)=>{
+
+    try{
+       
+        const user = await Login.findByIdAndUpdate(req.params.id, req.body);
+    
+ 
+    
+       
+        return res.status(200).send({ user:user } );
+
+    }
+    catch(err){
+
+        console.log(err);
+        return res.status(500).send("unable to singnin")
+    }
+    
+
+})
+
 Router.post("/login",  async (req, res)=>{
 
     try{
@@ -136,6 +158,7 @@ Router.post("/logout", Auth, async (req, res)=>{
 
     try {
         
+    
         req.user.tokens = req.user.tokens.filter((token)=> token !== req.token)
         req.user.save();
         return res.status(200).send("logged out")

@@ -1,0 +1,36 @@
+
+<table class="ui small table">
+    <thead>
+      <tr><th class="four wide">Job Title</th>
+        <th class="one wide">Location</th>    
+      <th class="one wide">type</th>
+      <th class="one wide">Experience level</th>
+      <th class="one wide">Application Deadline</th>
+      <th class="three wide">Description</th>
+      <th class="one wide"></th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let job of result">
+        <td>{{job.job_title}}</td>
+       
+        <td>{{job.location}}</td>
+        <td>{{job.type}}</td>
+        <td>{{job.exp_level}}</td>
+        <td>{{job.posted_date}}</td>
+        <td>{{job.job_description}}</td> 
+        <td> 
+          
+          <button (click)="showViewModal(job)" class="ui button green mini">
+            View details
+          </button> 
+  
+        </td>
+  
+      </tr>
+      
+    </tbody>
+  </table>
+  
+  
+  <app-job-modal (needsRefresh)="needsRefresh($event)"></app-job-modal>

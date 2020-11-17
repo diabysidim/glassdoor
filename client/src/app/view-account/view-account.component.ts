@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AccountModalComponent } from './account-modal/account-modal.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-account',
@@ -9,11 +10,18 @@ import { AccountModalComponent } from './account-modal/account-modal.component';
 export class ViewAccountComponent implements OnInit {
 
   @ViewChild(AccountModalComponent) accountModal;
-  constructor() { }
+  
+      constructor( private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-  }
+        profile: any;
+        
+        ngOnInit(): void {
 
+            this.route.data.subscribe(data=>{
+
+              this.profile = data["profile"];
+            })
+        }
   showUsernameModal():void{
 
     this.accountModal.showUsernameModal();

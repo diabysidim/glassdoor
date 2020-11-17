@@ -24,8 +24,5 @@ module.exports  =  async (req, res, next)=>{
         console.log(err)
         return res.status(401).send("Please authenticate");
         }  
-   
-
-
 
 }
